@@ -16,7 +16,7 @@ jobs:
       - name: Build JAR
         run: ./gradlew bootJar
       - name: ssh connection
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: 172.18.248.211
           username: user
