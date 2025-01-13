@@ -22,6 +22,7 @@ jobs:
           username: user
           password: 1234
           port: 22
+          key: ${{ secrets.SSHKEY }}
       - name: Stop existing container
         run: docker stop $(docker ps -q -f name=dockerapp) 2>/dev/null || true
       - name: Get existing image name
