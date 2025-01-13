@@ -19,7 +19,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 172.18.248.211
-          username: root
+          username: user
           password: 1234
           port: 22
       - name: Stop existing container
