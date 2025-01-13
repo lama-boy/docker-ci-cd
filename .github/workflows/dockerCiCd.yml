@@ -21,7 +21,6 @@ jobs:
           host: 172.18.248.211
           username: user
           key: ${{ secrets.SSHKEY }}
-          password: 1234
           port: 22
       - name: Stop existing container
         run: docker stop $(docker ps -q -f name=dockerapp) 2>/dev/null || true
