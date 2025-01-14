@@ -9,12 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Pull changes
-        run: git pull origin main
-      - name: Set permissions
-        run: chmod +x ./gradlew && chmod -R +x .
-      - name: Build JAR
-        run: ./gradlew bootJar
       - name: ssh connection
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -22,7 +16,12 @@ jobs:
           username: ${{ secrets.SSHKEY }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.HOSTPORT }}
-#         key: ${{ secrets.SSHKEY }}
+          script: |
+            cd C:\ws\docker-ci-cd
+            ./gradlew bootJar
+      - name: Build JAR
+        run: ./gradlew bootJar
+      # key: ${{ secrets.SSHKEY }}
       - name: Stop existing container
         run: docker stop $(docker ps -q -f name=dockerapp) 2>/dev/null || true
       - name: Get existing image name
