@@ -18,7 +18,7 @@ jobs:
           port: ${{ secrets.HOSTPORT }}
           script: |
             cd C:\ws\docker-ci-cd
-            chmod +x ./gradlew bootJar
+            chmod +x ./gradlew
       - name: Build JAR
         run: ./gradlew bootJar
       # key: ${{ secrets.SSHKEY }}
