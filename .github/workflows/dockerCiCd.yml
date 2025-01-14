@@ -23,8 +23,8 @@ jobs:
         run: ./gradlew bootJar
       # key: ${{ secrets.SSHKEY }}
       - name: Stop existing container
-        run: docker stop $(docker ps -q -f name=dockerapp) 2>/dev/null || true
-        sleep 5 # 5초 대기 (컨테이너 정지 확인)
+#        run: docker stop $(docker ps -q -f name=dockerapp) 2>/dev/null || true
+        run: docker stop dockerapp
       - name: Build and Tag Docker Image
         id: get_image_name
         run: |
