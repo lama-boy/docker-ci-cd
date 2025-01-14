@@ -17,4 +17,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.HOSTPORT }}
           script: |
+#           powershell -File C:\ws\gitWorkflow.ps1
             powershell -File C:\ws\gitWorkflow.ps1
