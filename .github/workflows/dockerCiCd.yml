@@ -24,10 +24,11 @@ jobs:
       # key: ${{ secrets.SSHKEY }}
       - name: Stop existing container
         run: docker stop $(docker ps -q -f name=dockerapp) 2>/dev/null || true
-      - name: Get existing image name
+      - name: Build and Tag Docker Image
         id: get_image_name
-        run: CONTAINER_ID=$(docker ps -aq -f name=dockerapp); IMAGE_ID=$(docker inspect -f '{{ .Image }}' $CONTAINER_ID); echo "::set-output name=image_id::$IMAGE_ID"
-      - name: Tag old image with timestamp
-        run: docker tag $IMAGE_ID dockerapp:${{ steps.get_image_name.outputs.image_id }}-${{ runner.os }}-${{ github.run_id }}
+        run: |
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          echo "::set-output name=IMAGE_TAG::$TIMESTAMP"
+          docker build -t dockerapp:$TIMESTAMP .
       - name: Run Docker container
-        run: docker run -d --name dockerapp -p 8080:8080 dockerapp:latest
+        run: docker run -d --name dockerapp -p 8080:8080 dockerapp:${{ steps.get_image_name.outputs.IMAGE_TAG }}
