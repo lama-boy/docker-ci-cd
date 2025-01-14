@@ -18,10 +18,11 @@ jobs:
       - name: ssh connection
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 172.18.248.211
-          username: user
-          key: ${{ secrets.SSHKEY }}
-          port: 22
+          host: ${{secrets.HOST}}
+          username: ${{ secrets.SSHKEY }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ HOSTPORT }}
+#         key: ${{ secrets.SSHKEY }}
       - name: Stop existing container
         run: docker stop $(docker ps -q -f name=dockerapp) 2>/dev/null || true
       - name: Get existing image name
