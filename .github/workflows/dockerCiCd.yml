@@ -17,11 +17,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.HOSTPORT }}
           script: |
-            cd C:\ws\docker-ci-cd
-            chmod +x ./gradlew
-            ./gradlew bootJar
-            docker stop $(docker ps -q -f name=dockerapp) 2>/dev/null || true
-            docker rm $(docker ps -aq -f name=dockerapp) 2>/dev/null || true
-            TIMESTAMP=$(date +%Y%m%d%H%M%S)
-            docker build -t dockerapp:$TIMESTAMP .
-            docker run -d --name dockerapp -p 8080:8080 dockerapp:$TIMESTAMP
+            powershell -File C:\ws\gitWorkflow.ps1
