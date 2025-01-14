@@ -21,7 +21,7 @@ jobs:
           host: ${{secrets.HOST}}
           username: ${{ secrets.SSHKEY }}
           password: ${{ secrets.PASSWORD }}
-          port: ${{ HOSTPORT }}
+          port: ${{ secrets.HOSTPORT }}
 #         key: ${{ secrets.SSHKEY }}
       - name: Stop existing container
         run: docker stop $(docker ps -q -f name=dockerapp) 2>/dev/null || true
